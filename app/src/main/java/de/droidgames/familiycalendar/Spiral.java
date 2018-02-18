@@ -89,7 +89,7 @@ public class Spiral {
     }
 
 
-    public Spiral(float[] Color) {
+    public Spiral(float[] Color, int sdep, int dep  ) {
 
 
 
@@ -97,26 +97,21 @@ public class Spiral {
         color = Color;
 
 
-        int numberPoints = 100;
+        int numberPoints = 10;
         int numberCirclePoints = 12;
-        int dep = 4;
-
-
-        int sdep = 1;
+        //int dep = 4;
+        //int sdep = 6;
         TimeGrid tg = new TimeGrid(sdep, dep,  numberPoints);
         SpiralParametrization st = new SpiralParametrization(tg);
 
 
-        for (int i = 1; i< dep;i++) {
-            Vector3f[] newVecs = st.GetPoints(i, numberCirclePoints);
-            float[] newFloats = GetFloatFromVecs(newVecs);
-            float[] bu = AppendFloat(spiralCoords, newFloats);
-            spiralCoords = bu;
-        }
-
-
-
-        vertexCount = spiralCoords.length / COORDS_PER_VERTEX;
+      //  for (int i = 1; i< dep+1;i++) {
+            Vector3f[] newVecs = st.GetPoints(dep, numberCirclePoints);
+//            float[] newFloats = GetFloatFromVecs(newVecs);
+//            float[] bu = AppendFloat(spiralCoords, newFloats);
+//            spiralCoords = bu;
+            spiralCoords =  GetFloatFromVecs(newVecs);
+            vertexCount = spiralCoords.length / COORDS_PER_VERTEX;
         // initialize vertex byte buffer for shape coordinates
         ByteBuffer bb = allocateDirect(
                 spiralCoords.length * 4);
@@ -129,6 +124,25 @@ public class Spiral {
 
         // add the coordinates to the FloatBuffer
         vertexBuffer.put(spiralCoords);
+
+
+
+
+
+
+//        vertexCount = spiralCoords.length / COORDS_PER_VERTEX;
+//        // initialize vertex byte buffer for shape coordinates
+//        ByteBuffer bb = allocateDirect(
+//                spiralCoords.length * 4);
+//        // use the device hardware's native byte order
+//        bb.order(nativeOrder());
+//
+//        // create a floating point buffer from the ByteBuffer
+//        vertexBuffer = bb.asFloatBuffer();
+//
+//
+//        // add the coordinates to the FloatBuffer
+//        vertexBuffer.put(spiralCoords);
         // set the buffer to read the first coordinate
         vertexBuffer.position(0);
 

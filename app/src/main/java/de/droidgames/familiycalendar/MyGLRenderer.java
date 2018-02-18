@@ -15,7 +15,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class MyGLRenderer implements GLSurfaceView.Renderer {
 
-    private Spiral mSpiral;
+    private Spiral[] mSpiral;
 
     private final float[] mMVPMatrix = new float[16];
     private final float[] mProjectionMatrix = new float[16];
@@ -49,7 +49,14 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         // Set the background frame color
         GLES20.glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
         float color[] = { 1f, 1f, 1f, 1.0f };
-        mSpiral = new Spiral(color);
+
+        int dep = 4;
+        int sdep = 1;
+        int depMin = 1;
+        mSpiral = new Spiral[dep-depMin+1];
+        for (int i = 0; i< dep-depMin+1;i++) {
+         mSpiral[i] = new Spiral(color,sdep,i+depMin );
+        }
     }
 
 
@@ -77,8 +84,9 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         // Note that the mMVPMatrix factor *must be first* in order
         // for the matrix multiplication product to be correct.
         Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0);
-
-       mSpiral.draw(scratch);
+        for (int i = 0; i< mSpiral.length;i++) {
+            mSpiral[i].draw(scratch);
+        }
 
     }
 

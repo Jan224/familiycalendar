@@ -7,32 +7,40 @@ package de.droidgames.familiycalendar;
 public class TimeGrid {
 
     private float[][] mTimePoints;
-    int[] factors;
+    private int[] mFactors;
+    int mStartDepth;
     //private int[][][] mPointsDepth;
 
     public float[][] getmTimePoints() {
         return mTimePoints;
     }
 
+    public int[] getmFactors() {
+        return mFactors;
+    }
 
+    public int getmStartDepth() {
+        return mStartDepth;
+    }
 
     public TimeGrid(int  StartDepth, int  Depth, int numberPoints) {
-        factors = new int[9];
-        factors[0] = 1000;
-        factors[1] = 1000;
-        factors[2] = 10;
-        factors[3] = 10;
-        factors[4] = 10;
-        factors[5] = 12;
-        factors[6] = 4;
-        factors[7] = 7;
-        factors[8] = 24;
+        mFactors = new int[9];
+        mFactors[0] = 1000;
+        mFactors[1] = 1000;
+        mFactors[2] = 10;
+        mFactors[3] = 10;
+        mFactors[4] = 10;
+        mFactors[5] = 12;
+        mFactors[6] = 4;
+        mFactors[7] = 7;
+        mFactors[8] = 24;
+        mStartDepth = StartDepth;
 
         mTimePoints = new float[Depth][];
 
         float stepsize= 100f;
         for (int i = StartDepth; i < StartDepth+ Depth; i++) {
-            stepsize *= 1f/(float)factors[i];
+            stepsize *= 1f/(float)mFactors[i];
             mTimePoints[i-StartDepth] = new float[numberPoints];
             for (int j = 0; j < numberPoints; j++) {
 

@@ -16,6 +16,7 @@ public class SpiralPoint {
     private SpiralPoint mParent;
 
 
+
     public SpiralPoint getmParent() {
         return mParent;
     }
@@ -42,8 +43,9 @@ public class SpiralPoint {
         mVelocity = Velocity;
     }
 
-    public SpiralPoint GetChild( float angle)
+    public SpiralPoint GetChild( float angle, float factor )
     {
+        float pi = (float)Math.PI;
         Vector3f axis = new Vector3f(mVelocity);
         float  vel = axis.length();
         axis.normalize();
@@ -58,7 +60,13 @@ public class SpiralPoint {
         float l =  mNewStep.length();
         Matrix.multiplyMV(ov,0,rotM,0,nv,0);
         newStep.set(ov[0],ov[1],ov[2]);
-        newStep.scale(1f/4f);
+        float scale = 2f * pi /factor;
+        if (scale> 1f/2f)
+        {
+            scale = 1f/2f;
+        }
+
+        newStep.scale(scale);
         Vector3f newVelocity = new Vector3f();
         newVelocity.cross(newStep,axis);
         newVelocity.scale(2f * (float)Math.PI);
