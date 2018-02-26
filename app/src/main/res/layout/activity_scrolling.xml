@@ -5,96 +5,57 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/spacebg"
     android:fitsSystemWindows="true"
     tools:context="de.droidgames.familiycalendar.ScrollingActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="0dp"
-        android:layout_height="180dp"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:elevation="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/fab2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/toolbar_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbar">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-            <include
-                android:id="@+id/include"
-                layout="@layout/content_scrolling"
-                android:layout_width="592dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="170dp"
-                android:layout_height="83dp"
-                android:layout_marginEnd="18dp"
-                android:text="Button"
-                app:layout_constraintEnd_toStartOf="@+id/include"
-                tools:layout_editor_absoluteY="79dp" />
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/floatingActionButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                app:srcCompat="@android:drawable/arrow_up_float"
-                tools:layout_editor_absoluteX="489dp"
-                tools:layout_editor_absoluteY="0dp" />
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/floatingActionButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                app:srcCompat="@android:drawable/arrow_down_float"
-                tools:layout_editor_absoluteX="489dp"
-                tools:layout_editor_absoluteY="70dp" />
-
-        </android.support.constraint.ConstraintLayout>
-    </android.support.design.widget.AppBarLayout>
+        app:srcCompat="@android:drawable/arrow_up_float" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:layout_anchor="@id/app_bar"
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toTopOf="@+id/fab3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/arrow_down_float" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_anchorGravity="bottom|end"
-        app:layout_constraintStart_toStartOf="@+id/app_bar"
-        app:layout_constraintTop_toTopOf="@+id/app_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="320dp"
-        android:layout_height="103dp"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="ButtonNeu"
+    <LinearLayout
+        android:id="@+id/GlContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="horizontal"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -2,12 +2,10 @@ package de.droidgames.familiycalendar;
 
 
 import android.content.Context;
-import android.graphics.PointF;
+import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.opengl.GLSurfaceView;
-import android.support.v4.view.ScaleGestureDetectorCompat;
-import android.support.v4.view.ViewCompat;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 
@@ -35,6 +33,10 @@ class MyGLSurfaceView extends GLSurfaceView {
 
         // Create an OpenGL ES 2.0 context
         setEGLContextClientVersion(2);
+        setEGLConfigChooser(8,8,8,8,16,0);
+        //setBackgroundResource(R.drawable.spacebg);
+        getHolder().setFormat(PixelFormat.RGBA_8888);
+        getHolder().setFormat(PixelFormat.TRANSLUCENT);
 
         mRenderer = new MyGLRenderer();
 
@@ -43,6 +45,7 @@ class MyGLSurfaceView extends GLSurfaceView {
 
         // Render the view only when there is a change in the drawing data
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+
     }
 
 //    public boolean onTouchEvent(MotionEvent event) {
@@ -50,6 +53,10 @@ class MyGLSurfaceView extends GLSurfaceView {
 //        retVal = mGestureDetector.onTouchEvent(event) || retVal;
 //        return retVal || super.onTouchEvent(event);
 //    }
+
+    public void setDepth(int d) {
+        mRenderer.setDep(d);
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {

@@ -2,7 +2,6 @@ package de.droidgames.familiycalendar;
 
 
 
-import android.opengl.Matrix;
 import javax.vecmath.Vector3f;
 
 
@@ -11,13 +10,12 @@ import javax.vecmath.Vector3f;
  */
 
 
-
-public class SpiralParametrization {
+class SpiralParametrization {
 
  private float[] factors;
 
 
-    TimeGrid mTimeGrid;
+    private TimeGrid mTimeGrid;
 
     public SpiralParametrization(TimeGrid Tg ) {
 
@@ -53,7 +51,7 @@ public class SpiralParametrization {
                     p[0][0] = (float) (Math.atan(x) * 2.0 / pi);
                     p[0][1] = 0f;
                     p[0][2] = 0f;
-                    p[1][0] = (float) (2f / ((float) pi * (1f + x * x)));
+                    p[1][0] = 2f / (pi * (1f + x * x));
                     p[1][1] = 0f;
                     p[1][2] = 0f;
                     float[] ls = new float[3];

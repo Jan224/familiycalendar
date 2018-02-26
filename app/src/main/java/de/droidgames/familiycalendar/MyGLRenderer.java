@@ -13,8 +13,9 @@ import javax.microedition.khronos.opengles.GL10;
  * Created by bandy on 29.01.2018.
  */
 
-public class MyGLRenderer implements GLSurfaceView.Renderer {
+class MyGLRenderer implements GLSurfaceView.Renderer {
 
+    private int m_dep;
     private Spiral[] mSpiral;
 
     private final float[] mMVPMatrix = new float[16];
@@ -23,7 +24,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     private float[] xRotationMatrix = new float[16];
     private float[] yRotationMatrix = new float[16];
     private float[] mRotationMatrix = new float[16];
-    public volatile float xAngle;
+    private volatile float xAngle;
 
     public float getxAngle() {
         return xAngle;
@@ -33,7 +34,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         xAngle = angle;
     }
 
-    public volatile float yAngle;
+    private volatile float yAngle;
 
     public float getyAngle() {
         return yAngle;
@@ -43,22 +44,23 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         yAngle = angle;
     }
 
-
+    public void setDep(int d) {
+        m_dep = d;
+    }
 
     public void onSurfaceCreated(GL10 unused, EGLConfig config) {
         // Set the background frame color
-        GLES20.glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-        float color[] = { 1f, 1f, 1f, 1.0f };
+        //GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        float color[] = {1f, 1f, 1f, 1.0f};
 
-        int dep = 4;
+        int dep = 2;
         int sdep = 1;
         int depMin = 1;
-        mSpiral = new Spiral[dep-depMin+1];
-        for (int i = 0; i< dep-depMin+1;i++) {
-         mSpiral[i] = new Spiral(color,sdep,i+depMin );
+        mSpiral = new Spiral[dep - depMin + 1];
+        for (int i = 0; i < dep - depMin + 1; i++) {
+            mSpiral[i] = new Spiral(color, sdep, i + depMin);
         }
     }
-
 
 
     public void onDrawFrame(GL10 unused) {
@@ -78,18 +80,17 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         Matrix.setRotateM(xRotationMatrix, 0, xAngle, -1.0f, 0, 0f);
 
         Matrix.setRotateM(yRotationMatrix, 0, yAngle, 0, -1.0f, 0);
-        Matrix.multiplyMM(mRotationMatrix,0, xRotationMatrix, 0, yRotationMatrix,0);
+        Matrix.multiplyMM(mRotationMatrix, 0, xRotationMatrix, 0, yRotationMatrix, 0);
 
         // Combine the rotation matrix with the projection and camera view
         // Note that the mMVPMatrix factor *must be first* in order
         // for the matrix multiplication product to be correct.
         Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0);
-        for (int i = 0; i< mSpiral.length;i++) {
-            mSpiral[i].draw(scratch);
+        for (Spiral aMSpiral : mSpiral) {
+            aMSpiral.draw(scratch);
         }
 
     }
-
 
 
     public void onSurfaceChanged(GL10 unused, int width, int height) {
@@ -103,7 +104,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
     }
 
-    public static int loadShader(int type, String shaderCode){
+    public static int loadShader(int type, String shaderCode) {
 
         // create a vertex shader type (GLES20.GL_VERTEX_SHADER)
         // or a fragment shader type (GLES20.GL_FRAGMENT_SHADER)

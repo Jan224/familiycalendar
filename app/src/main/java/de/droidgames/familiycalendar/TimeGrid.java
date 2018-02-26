@@ -4,7 +4,7 @@ package de.droidgames.familiycalendar;
  * Created by bandy on 16.02.2018.
  */
 
-public class TimeGrid {
+class TimeGrid {
 
     private float[][] mTimePoints;
     private int[] mFactors;

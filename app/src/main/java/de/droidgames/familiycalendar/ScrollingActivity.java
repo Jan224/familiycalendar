@@ -1,27 +1,13 @@
 package de.droidgames.familiycalendar;
 
-
+import android.graphics.PixelFormat;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
-//import net.fortuna.ical4j.model.parameter.AltRep;
-import net.fortuna.ical4j.model.Calendar;
-import net.fortuna.ical4j.model.property.Version;
-import net.fortuna.ical4j.model.property.CalScale;
-import net.fortuna.ical4j.model.property.ProdId;
-import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.model.Date;
-
-import java.util.Vector;
-
-import javax.vecmath.Vector3d;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class ScrollingActivity extends AppCompatActivity {
 
@@ -31,27 +17,46 @@ public class ScrollingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mGLView = new MyGLSurfaceView(this);
-        setContentView(mGLView);
+
+        setContentView(R.layout.activity_scrolling);
+
+        LinearLayout linearLayout = findViewById(R.id.GlContainer);
+        linearLayout.addView(mGLView);
+
+        FloatingActionButton fab1 = findViewById(R.id.fab1);
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"FAB1",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        FloatingActionButton fab2 = findViewById(R.id.fab2);
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"FAB2",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        FloatingActionButton fab3 = findViewById(R.id.fab3);
+        fab3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"FAB3",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
-    public  boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_scrolling, menu);
-        return true;
+    protected void onPause() {
+        super.onPause();
+        mGLView.onPause();
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    protected void onResume() {
+        super.onResume();
+        mGLView.onResume();
     }
 }

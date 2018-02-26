@@ -14,7 +14,7 @@ import static java.nio.ByteOrder.*;
  * Created by bandy on 29.01.2018.
  */
 
-public class Spiral {
+class Spiral {
 
     private int mPositionHandle;
     private int mColorHandle;
@@ -54,11 +54,11 @@ public class Spiral {
 
 
     // number of coordinates per vertex in this array
-    static final int COORDS_PER_VERTEX = 3;
-    float spiralCoords[];
+    private static final int COORDS_PER_VERTEX = 3;
+    private float[] spiralCoords;
 
     // Set color with red, green, blue and alpha (opacity) values
-    float color[];// = { 0.63671875f, 0.76953125f, 0.22265625f, 1.0f };
+    private float[] color;// = { 0.63671875f, 0.76953125f, 0.22265625f, 1.0f };
 
     private float[] GetFloatFromVecs(Vector3f[] Vecs) {
         int n = Vecs.length * 3;
@@ -79,12 +79,8 @@ public class Spiral {
         float[] ret = new float[n+m];
 
 
-        for (int i = 0; i <n; i++) {
-            ret[i] = f1[i];
-        }
-        for (int i = 0; i <m; i++) {
-            ret[i+n] = f2[i];
-        }
+        System.arraycopy(f1, 0, ret, 0, n);
+        System.arraycopy(f2, 0, ret, 0 + n, m);
         return ret;
     }
 
