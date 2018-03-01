@@ -66,7 +66,7 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
         initSpiral();
     }
 
-    public void initSpiral() {
+    private void initSpiral() {
         float color[] = {1f, 1f, 1f, 1.0f};
         for (int i = 0; i < dep - depMin + 1; i++) {
             mSpiral[i] = new Spiral(color, m_sdep, i + depMin);

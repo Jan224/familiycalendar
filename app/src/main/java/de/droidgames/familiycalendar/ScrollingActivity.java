@@ -1,6 +1,5 @@
 package de.droidgames.familiycalendar;
 
-import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;

@@ -79,8 +79,8 @@ class Spiral {
         float[] ret = new float[n+m];
 
 
-        System.arraycopy(f1, 0, ret, 0, n);
-        System.arraycopy(f2, 0, ret, 0 + n, m);
+        System.arraycopy(f1 != null ? f1 : new float[0], 0, ret, 0, n);
+        System.arraycopy(f2 != null ? f2 : new float[0], 0, ret, n, m);
         return ret;
     }
 
