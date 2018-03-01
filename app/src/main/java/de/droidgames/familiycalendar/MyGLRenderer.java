@@ -15,7 +15,9 @@ import javax.microedition.khronos.opengles.GL10;
 
 class MyGLRenderer implements GLSurfaceView.Renderer {
 
-    private int m_dep;
+    private int m_sdep;
+    private int dep;
+    private int depMin;
     private Spiral[] mSpiral;
 
     private final float[] mMVPMatrix = new float[16];
@@ -44,24 +46,32 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
         yAngle = angle;
     }
 
-    public void setDep(int d) {
-        m_dep = d;
+    public void incSDepth() {
+        m_sdep ++;
+        //initSpiral();
+    }
+    public void decSDepth() {
+        m_sdep --;
+        //initSpiral();
     }
 
     public void onSurfaceCreated(GL10 unused, EGLConfig config) {
+
         // Set the background frame color
         //GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        float color[] = {1f, 1f, 1f, 1.0f};
-
-        int dep = 2;
-        int sdep = 1;
-        int depMin = 1;
+        dep = 4;
+        m_sdep = 1;
+        depMin = 1;
         mSpiral = new Spiral[dep - depMin + 1];
-        for (int i = 0; i < dep - depMin + 1; i++) {
-            mSpiral[i] = new Spiral(color, sdep, i + depMin);
-        }
+        initSpiral();
     }
 
+    public void initSpiral() {
+        float color[] = {1f, 1f, 1f, 1.0f};
+        for (int i = 0; i < dep - depMin + 1; i++) {
+            mSpiral[i] = new Spiral(color, m_sdep, i + depMin);
+        }
+    }
 
     public void onDrawFrame(GL10 unused) {
 
@@ -89,7 +99,6 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
         for (Spiral aMSpiral : mSpiral) {
             aMSpiral.draw(scratch);
         }
-
     }
 
 

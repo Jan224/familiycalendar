@@ -17,7 +17,6 @@
         android:layout_marginEnd="8dp"
         android:clickable="true"
         android:focusable="true"
-        app:elevation="14dp"
         app:layout_constraintBottom_toTopOf="@+id/fab2"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/arrow_up_float" />

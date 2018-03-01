@@ -1,6 +1,5 @@
 package de.droidgames.familiycalendar;
 
-import android.graphics.PixelFormat;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,12 +10,13 @@ import android.widget.Toast;
 
 public class ScrollingActivity extends AppCompatActivity {
 
-    private GLSurfaceView mGLView;
+    private MyGLSurfaceView mGLView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mGLView = new MyGLSurfaceView(this);
+
 
         setContentView(R.layout.activity_scrolling);
 
@@ -27,6 +27,7 @@ public class ScrollingActivity extends AppCompatActivity {
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mGLView.incSDepth();
                 Toast.makeText(getApplicationContext(),"FAB1",Toast.LENGTH_SHORT).show();
             }
         });
@@ -35,6 +36,7 @@ public class ScrollingActivity extends AppCompatActivity {
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mGLView.decSDepth();
                 Toast.makeText(getApplicationContext(),"FAB2",Toast.LENGTH_SHORT).show();
             }
         });

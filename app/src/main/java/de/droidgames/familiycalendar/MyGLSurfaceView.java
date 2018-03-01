@@ -14,7 +14,7 @@ import android.view.ScaleGestureDetector;
  * Created by bandy on 29.01.2018.
  */
 
-class MyGLSurfaceView extends GLSurfaceView {
+public class MyGLSurfaceView extends GLSurfaceView {
 
 
     private final MyGLRenderer mRenderer;
@@ -35,8 +35,8 @@ class MyGLSurfaceView extends GLSurfaceView {
         setEGLContextClientVersion(2);
         setEGLConfigChooser(8,8,8,8,16,0);
         //setBackgroundResource(R.drawable.spacebg);
-        getHolder().setFormat(PixelFormat.RGBA_8888);
         getHolder().setFormat(PixelFormat.TRANSLUCENT);
+        setZOrderOnTop(true);
 
         mRenderer = new MyGLRenderer();
 
@@ -54,8 +54,12 @@ class MyGLSurfaceView extends GLSurfaceView {
 //        return retVal || super.onTouchEvent(event);
 //    }
 
-    public void setDepth(int d) {
-        mRenderer.setDep(d);
+    public void incSDepth() {
+        mRenderer.incSDepth();
+    }
+
+    public void decSDepth() {
+        mRenderer.decSDepth();
     }
 
     @Override
