@@ -34,7 +34,6 @@ public class MyGLSurfaceView extends GLSurfaceView {
         // Create an OpenGL ES 2.0 context
         setEGLContextClientVersion(2);
         setEGLConfigChooser(8,8,8,8,16,0);
-        //setBackgroundResource(R.drawable.spacebg);
         getHolder().setFormat(PixelFormat.TRANSLUCENT);
         setZOrderOnTop(true);
 
@@ -47,12 +46,6 @@ public class MyGLSurfaceView extends GLSurfaceView {
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 
     }
-
-//    public boolean onTouchEvent(MotionEvent event) {
-//        boolean retVal = mScaleGestureDetector.onTouchEvent(event);
-//        retVal = mGestureDetector.onTouchEvent(event) || retVal;
-//        return retVal || super.onTouchEvent(event);
-//    }
 
     public void incSDepth() {
         mRenderer.incSDepth();
@@ -72,6 +65,7 @@ public class MyGLSurfaceView extends GLSurfaceView {
         float y = e.getY();
 
         switch (e.getAction()) {
+
             case MotionEvent.ACTION_MOVE:
 
                 float dx = x - mPreviousX;

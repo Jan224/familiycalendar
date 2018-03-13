@@ -16,7 +16,6 @@ public class ScrollingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mGLView = new MyGLSurfaceView(this);
 
-
         setContentView(R.layout.activity_scrolling);
 
         LinearLayout linearLayout = findViewById(R.id.GlContainer);
@@ -27,7 +26,6 @@ public class ScrollingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mGLView.incSDepth();
-                Toast.makeText(getApplicationContext(),"FAB1",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -36,7 +34,6 @@ public class ScrollingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mGLView.decSDepth();
-                Toast.makeText(getApplicationContext(),"FAB2",Toast.LENGTH_SHORT).show();
             }
         });
 

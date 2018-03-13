@@ -87,11 +87,8 @@ class Spiral {
 
     public Spiral(float[] Color, int sdep, int dep  ) {
 
-
-
         int dim = 2;
         color = Color;
-
 
         int numberPoints = 10;
         int numberCirclePoints = 12;
@@ -99,7 +96,6 @@ class Spiral {
         //int sdep = 6;
         TimeGrid tg = new TimeGrid(sdep, dep,  numberPoints);
         SpiralParametrization st = new SpiralParametrization(tg);
-
 
       //  for (int i = 1; i< dep+1;i++) {
             Vector3f[] newVecs = st.GetPoints(dep, numberCirclePoints);

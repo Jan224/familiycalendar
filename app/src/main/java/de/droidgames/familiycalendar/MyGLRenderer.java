@@ -19,6 +19,7 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
     private int dep;
     private int depMin;
     private Spiral[] mSpiral;
+    private Spiral[][] mSpiral2;
 
     private final float[] mMVPMatrix = new float[16];
     private final float[] mProjectionMatrix = new float[16];
@@ -48,11 +49,11 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
 
     public void incSDepth() {
         m_sdep ++;
-        //initSpiral();
     }
+
     public void decSDepth() {
         m_sdep --;
-        //initSpiral();
+        m_sdep= Math.max(m_sdep,0);
     }
 
     public void onSurfaceCreated(GL10 unused, EGLConfig config) {
@@ -63,6 +64,7 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
         m_sdep = 1;
         depMin = 1;
         mSpiral = new Spiral[dep - depMin + 1];
+        mSpiral2= new Spiral[dep- depMin+1][4];
         initSpiral();
     }
 
@@ -70,6 +72,11 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
         float color[] = {1f, 1f, 1f, 1.0f};
         for (int i = 0; i < dep - depMin + 1; i++) {
             mSpiral[i] = new Spiral(color, m_sdep, i + depMin);
+        }
+        for (int j= 0; j<4;j++) {
+            for (int i = 0; i < dep - depMin + 1; i++) {
+                mSpiral2[i][j] = new Spiral(color, j+1, i + depMin);
+            }
         }
     }
 
@@ -96,11 +103,14 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
         // Note that the mMVPMatrix factor *must be first* in order
         // for the matrix multiplication product to be correct.
         Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0);
-        for (Spiral aMSpiral : mSpiral) {
+        //for (Spiral aMSpiral : mSpiral) {
+        //    aMSpiral.draw(scratch);
+        //}
+
+        for (Spiral aMSpiral : mSpiral2[m_sdep]) {
             aMSpiral.draw(scratch);
         }
     }
-
 
     public void onSurfaceChanged(GL10 unused, int width, int height) {
         GLES20.glViewport(0, 0, width, height);
@@ -109,9 +119,9 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
         // this projection matrix is applied to object coordinates
         // in the onDrawFrame() method
         Matrix.frustumM(mProjectionMatrix, 0, -ratio, ratio, -1, 1, 3, 7);
-
-
     }
+
+
 
     public static int loadShader(int type, String shaderCode) {
 
@@ -122,7 +132,6 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
         // add the source code to the shader and compile it
         GLES20.glShaderSource(shader, shaderCode);
         GLES20.glCompileShader(shader);
-
         return shader;
     }
 }
